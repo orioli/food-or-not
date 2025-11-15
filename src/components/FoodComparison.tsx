@@ -15,11 +15,22 @@ interface FoodComparisonProps {
   correctAnswers: number;
   score: number;
   completedComparisons: number;
+  comparisons: Array<{
+    sessionId: string;
+    winnerId: string;
+    loserId: string;
+    winnerName: string;
+    loserName: string;
+    winnerSugar: number;
+    loserSugar: number;
+    timestamp: Date;
+    isCorrect: boolean;
+  }>;
 }
 
 import { ResultsScreen } from "./ResultsScreen";
 
-export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, completedComparisons }: FoodComparisonProps) => {
+export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, completedComparisons, comparisons }: FoodComparisonProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSide, setSelectedSide] = useState<'left' | 'right' | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -30,6 +41,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
         totalComparisons={completedComparisons}
         correctAnswers={correctAnswers}
         score={score}
+        comparisons={comparisons}
       />
     );
   }

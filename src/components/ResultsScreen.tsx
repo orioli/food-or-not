@@ -1,13 +1,25 @@
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ReferenceLine, ResponsiveContainer, Label } from "recharts";
 
 interface ResultsScreenProps {
   totalComparisons: number;
   correctAnswers: number;
   score: number;
+  comparisons: Array<{
+    sessionId: string;
+    winnerId: string;
+    loserId: string;
+    winnerName: string;
+    loserName: string;
+    winnerSugar: number;
+    loserSugar: number;
+    timestamp: Date;
+    isCorrect: boolean;
+  }>;
 }
 
-export const ResultsScreen = ({ totalComparisons, correctAnswers, score }: ResultsScreenProps) => {
+export const ResultsScreen = ({ totalComparisons, correctAnswers, score, comparisons }: ResultsScreenProps) => {
   // Generate Gaussian/Binomial distribution data
   // For binomial: mean = n*p, std = sqrt(n*p*(1-p)) where p=0.5 for random guessing
   const n = totalComparisons;
@@ -28,6 +40,37 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score }: Resul
 
   const data = generateGaussianData();
   const accuracy = totalComparisons > 0 ? Math.round((correctAnswers / totalComparisons) * 100) : 0;
+
+  const downloadData = () => {
+    // Create CSV content
+    const headers = ["Trial", "Food 1", "Sugar %", "Food 2", "Sugar %", "Your Choice", "Correct?", "Timestamp"];
+    const csvRows = [headers.join(",")];
+    
+    comparisons.forEach((comp, index) => {
+      const row = [
+        index + 1,
+        `"${comp.winnerName}"`,
+        comp.winnerSugar,
+        `"${comp.loserName}"`,
+        comp.loserSugar,
+        `"${comp.winnerName}"`,
+        comp.isCorrect ? "Correct" : "Incorrect",
+        comp.timestamp.toISOString()
+      ];
+      csvRows.push(row.join(","));
+    });
+    
+    const csvContent = csvRows.join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `sugar-test-results-${new Date().toISOString().split("T")[0]}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
@@ -105,6 +148,14 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score }: Resul
       </Card>
 
       <div className="mt-8">
+        <Button 
+          onClick={downloadData}
+          className="mb-4 bg-green-600 hover:bg-green-700 text-white"
+          size="lg"
+        >
+          Download Your Data
+        </Button>
+        
         <p className="text-muted-foreground mb-3">
           Thank you for helping us understand food perceptions!
         </p>
