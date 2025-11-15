@@ -72,6 +72,26 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, compari
     window.URL.revokeObjectURL(url);
   };
 
+  const challengeFriend = () => {
+    const shareText = `I scored ${correctAnswers}/${totalComparisons} (${accuracy}%) on the Sugar Perception Test! Can you beat my score?`;
+    const shareUrl = window.location.href;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: "Sugar Perception Test Challenge",
+        text: shareText,
+        url: shareUrl,
+      }).catch(() => {
+        // Fallback to copying link
+        navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+      });
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+      alert("Challenge link copied to clipboard!");
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
       <h2 className="text-4xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
@@ -145,13 +165,22 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, compari
       </Card>
 
       <div className="mt-8">
-        <Button 
-          onClick={downloadData}
-          className="mb-4 bg-green-600 hover:bg-green-700 text-white"
-          size="lg"
-        >
-          Download Your Data
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-4">
+          <Button 
+            onClick={downloadData}
+            className="bg-green-600 hover:bg-green-700 text-white"
+            size="lg"
+          >
+            Download Your Data
+          </Button>
+          <Button 
+            onClick={challengeFriend}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+            size="lg"
+          >
+            Challenge a Friend
+          </Button>
+        </div>
         
         <p className="text-muted-foreground mb-1">
           Thank you for helping us understand food perceptions!
