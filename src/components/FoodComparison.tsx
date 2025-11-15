@@ -6,6 +6,7 @@ interface FoodItem {
   id: string;
   imageUrl: string;
   name: string;
+  sugarPercentage: number;
 }
 
 interface FoodComparisonProps {
