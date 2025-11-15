@@ -2,43 +2,67 @@ import { useState, useEffect } from "react";
 import { FoodComparison } from "@/components/FoodComparison";
 import { toast } from "sonner";
 
+import lindtChocolate from "@/assets/lindt-chocolate.jpg";
+import kitkat from "@/assets/kitkat.jpg";
+import kefir from "@/assets/kefir.jpg";
+import activia from "@/assets/activia.jpg";
+import blackBeans from "@/assets/black-beans.jpg";
+import heinzBeanz from "@/assets/heinz-beanz.jpg";
+import pregoSauce from "@/assets/prego-sauce.jpg";
+import tomatoSauce from "@/assets/tomato-sauce.jpg";
+import heinzKetchup from "@/assets/heinz-ketchup.jpg";
+
 interface FoodItem {
   id: string;
   imageUrl: string;
   name: string;
 }
 
-// Mock data - replace with your actual images
 const FOOD_ITEMS: FoodItem[] = [
   {
     id: "1",
-    imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
-    name: "Fresh Salad"
+    imageUrl: lindtChocolate,
+    name: "Lindt 90% Dark Chocolate"
   },
   {
     id: "2",
-    imageUrl: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
-    name: "Burger & Fries"
+    imageUrl: kitkat,
+    name: "Kit Kat"
   },
   {
     id: "3",
-    imageUrl: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=800&q=80",
-    name: "Fruit Smoothie"
+    imageUrl: kefir,
+    name: "Kefir"
   },
   {
     id: "4",
-    imageUrl: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800&q=80",
-    name: "Donuts"
+    imageUrl: activia,
+    name: "Activia Yogurt"
   },
   {
     id: "5",
-    imageUrl: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
-    name: "Sushi"
+    imageUrl: blackBeans,
+    name: "Black Beans"
   },
   {
     id: "6",
-    imageUrl: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=800&q=80",
-    name: "Pizza"
+    imageUrl: heinzBeanz,
+    name: "Heinz Beanz"
+  },
+  {
+    id: "7",
+    imageUrl: pregoSauce,
+    name: "Prego Sauce"
+  },
+  {
+    id: "8",
+    imageUrl: tomatoSauce,
+    name: "Tomato Sauce"
+  },
+  {
+    id: "9",
+    imageUrl: heinzKetchup,
+    name: "Heinz Ketchup"
   },
 ];
 
