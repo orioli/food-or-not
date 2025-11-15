@@ -78,7 +78,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
       setSelectedSide(null);
       setIsAnimating(false);
       setShowFeedback(null);
-    }, 1200);
+    }, 350);
   };
 
   return (
