@@ -104,9 +104,16 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score }: Resul
         </div>
       </Card>
 
-      <p className="text-muted-foreground mt-8">
-        Thank you for helping us understand food perceptions!
-      </p>
+      <div className="mt-8">
+        <p className="text-muted-foreground mb-3">
+          Thank you for helping us understand food perceptions!
+        </p>
+        <p className="text-lg font-semibold text-foreground">
+          {correctAnswers < 7 && "You underperform a random monkey playing the game"}
+          {correctAnswers >= 7 && correctAnswers <= 11 && "Slightly better than a teenager"}
+          {correctAnswers > 11 && "On par with nutritionist knowledge"}
+        </p>
+      </div>
     </div>
   );
 };
