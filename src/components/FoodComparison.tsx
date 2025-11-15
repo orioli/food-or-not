@@ -50,6 +50,14 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
   }
 
   const [leftFood, rightFood] = foodPairs[currentIndex];
+  
+  // CRITICAL VALIDATION: Prevent duplicate items on both sides
+  if (leftFood.id === rightFood.id) {
+    console.error('❌ DUPLICATE BUG DETECTED:', leftFood.name, 'appears on both sides!');
+    // Skip to next comparison immediately
+    setTimeout(() => setCurrentIndex(prev => prev + 1), 0);
+    return null;
+  }
 
   const handleChoice = (side: 'left' | 'right') => {
     if (isAnimating) return;
