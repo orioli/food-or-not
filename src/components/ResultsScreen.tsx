@@ -1,11 +1,13 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ReferenceLine, ResponsiveContainer, Label } from "recharts";
+import { useEffect } from "react";
 
 interface ResultsScreenProps {
   totalComparisons: number;
   correctAnswers: number;
   score: number;
+  sessionId: string;
   comparisons: Array<{
     sessionId: string;
     winnerId: string;
@@ -19,7 +21,47 @@ interface ResultsScreenProps {
   }>;
 }
 
-export const ResultsScreen = ({ totalComparisons, correctAnswers, score, comparisons }: ResultsScreenProps) => {
+export const ResultsScreen = ({ totalComparisons, correctAnswers, score, sessionId, comparisons }: ResultsScreenProps) => {
+  const accuracy = totalComparisons > 0 ? Math.round((correctAnswers / totalComparisons) * 100) : 0;
+
+  // Record session data when component mounts
+  useEffect(() => {
+    const recordSession = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/record-session`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            sessionId,
+            totalComparisons,
+            correctAnswers,
+            accuracy,
+            comparisons: comparisons.map(comp => ({
+              winnerName: comp.winnerName,
+              winnerSugar: comp.winnerSugar,
+              loserName: comp.loserName,
+              loserSugar: comp.loserSugar,
+              isCorrect: comp.isCorrect,
+              timestamp: comp.timestamp.toISOString(),
+            })),
+          }),
+        });
+
+        if (response.ok) {
+          console.log('Session data recorded successfully');
+        } else {
+          console.error('Error recording session:', await response.text());
+        }
+      } catch (error) {
+        console.error('Error recording session:', error);
+      }
+    };
+
+    recordSession();
+  }, [sessionId, totalComparisons, correctAnswers, accuracy, comparisons]);
   // Generate Gaussian/Binomial distribution data
   // For binomial: mean = n*p, std = sqrt(n*p*(1-p)) where p=0.5 for random guessing
   const n = totalComparisons;
@@ -39,7 +81,6 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, compari
   };
 
   const data = generateGaussianData();
-  const accuracy = totalComparisons > 0 ? Math.round((correctAnswers / totalComparisons) * 100) : 0;
 
   const downloadData = () => {
     // Create CSV content
