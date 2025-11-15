@@ -87,7 +87,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6 md:gap-8 relative">
+      <div className="grid grid-cols-2 gap-3 md:gap-8 relative">
         <Card
           onClick={() => handleChoice('left')}
           className={cn(
@@ -108,14 +108,14 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             />
           </div>
-          <div className="p-4 text-center bg-card">
-            <h3 className="text-lg font-semibold text-card-foreground">
+          <div className="p-2 md:p-4 text-center bg-card">
+            <h3 className="text-sm md:text-lg font-semibold text-card-foreground">
               {leftFood.name}
             </h3>
           </div>
           {selectedSide === 'left' && (
             <div className="absolute inset-0 bg-primary/10 flex items-center justify-center backdrop-blur-[2px]">
-              <div className="text-6xl">✓</div>
+              <div className="text-4xl md:text-6xl">✓</div>
             </div>
           )}
         </Card>
@@ -124,7 +124,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
         {showFeedback && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
             <div className="w-[20%] aspect-square bg-background/95 rounded-full flex items-center justify-center shadow-2xl border-4 border-primary animate-scale-in">
-              <span className="text-8xl">
+              <span className="text-5xl md:text-8xl">
                 {showFeedback === 'correct' ? '✅' : '❌'}
               </span>
             </div>
@@ -151,14 +151,14 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             />
           </div>
-          <div className="p-4 text-center bg-card">
-            <h3 className="text-lg font-semibold text-card-foreground">
+          <div className="p-2 md:p-4 text-center bg-card">
+            <h3 className="text-sm md:text-lg font-semibold text-card-foreground">
               {rightFood.name}
             </h3>
           </div>
           {selectedSide === 'right' && (
             <div className="absolute inset-0 bg-primary/10 flex items-center justify-center backdrop-blur-[2px]">
-              <div className="text-6xl">✓</div>
+              <div className="text-4xl md:text-6xl">✓</div>
             </div>
           )}
         </Card>
