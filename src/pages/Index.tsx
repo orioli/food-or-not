@@ -2,15 +2,12 @@ import { useState, useEffect } from "react";
 import { FoodComparison } from "@/components/FoodComparison";
 import { toast } from "sonner";
 
-import lindtChocolate from "@/assets/lindt-chocolate.jpg";
-import kitkat from "@/assets/kitkat.jpg";
-import kefir from "@/assets/kefir.jpg";
-import activia from "@/assets/activia.jpg";
-import blackBeans from "@/assets/black-beans.jpg";
-import heinzBeanz from "@/assets/heinz-beanz.jpg";
-import pregoSauce from "@/assets/prego-sauce.jpg";
-import tomatoSauce from "@/assets/tomato-sauce.jpg";
-import heinzKetchup from "@/assets/heinz-ketchup.jpg";
+import prego from "@/assets/8_prego.jpeg";
+import noosa from "@/assets/16_noosa.jpeg";
+import quakerMedleys from "@/assets/26_quaker_medleys.jpeg";
+import clifBar from "@/assets/31_clif_bar.jpeg";
+import kitKat from "@/assets/50_kit_kat.jpeg";
+import honeySmacks from "@/assets/59_honey_smacks.jpeg";
 
 interface FoodItem {
   id: string;
@@ -21,48 +18,33 @@ interface FoodItem {
 const FOOD_ITEMS: FoodItem[] = [
   {
     id: "1",
-    imageUrl: lindtChocolate,
-    name: "Lindt 90% Dark Chocolate"
+    imageUrl: prego,
+    name: "Prego Sauce (8% sugar)"
   },
   {
     id: "2",
-    imageUrl: kitkat,
-    name: "Kit Kat"
+    imageUrl: noosa,
+    name: "Noosa Yogurt (16% sugar)"
   },
   {
     id: "3",
-    imageUrl: kefir,
-    name: "Kefir"
+    imageUrl: quakerMedleys,
+    name: "Quaker Real Medleys (26% sugar)"
   },
   {
     id: "4",
-    imageUrl: activia,
-    name: "Activia Yogurt"
+    imageUrl: clifBar,
+    name: "Clif Bar (31% sugar)"
   },
   {
     id: "5",
-    imageUrl: blackBeans,
-    name: "Black Beans"
+    imageUrl: kitKat,
+    name: "Kit Kat (50% sugar)"
   },
   {
     id: "6",
-    imageUrl: heinzBeanz,
-    name: "Heinz Beanz"
-  },
-  {
-    id: "7",
-    imageUrl: pregoSauce,
-    name: "Prego Sauce"
-  },
-  {
-    id: "8",
-    imageUrl: tomatoSauce,
-    name: "Tomato Sauce"
-  },
-  {
-    id: "9",
-    imageUrl: heinzKetchup,
-    name: "Heinz Ketchup"
+    imageUrl: honeySmacks,
+    name: "Honey Smacks Cereal (59% sugar)"
   },
 ];
 
