@@ -182,7 +182,7 @@ const Index = () => {
         />
 
         <footer className="mt-16 text-center text-sm text-muted-foreground">
-          <p>Anonymous session • No data is personally identifiable</p>
+          <p>Anonymous session • No data is personally identifiable or being logged</p>
           <p className="mt-2">
             Comparisons made: {comparisons.length} | 
             Correct: {correctAnswers} | 
