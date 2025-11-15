@@ -130,12 +130,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-bg">
-      <div className="container mx-auto py-8 md:py-12">
-        <header className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+      <div className="container mx-auto py-4 md:py-12 px-0 md:px-4">
+        <header className="text-center mb-6 md:mb-12 px-2 md:px-0">
+          <h1 className="text-3xl md:text-6xl font-bold mb-2 md:mb-4 bg-gradient-primary bg-clip-text text-transparent">
             Sugar Perception Test
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Help us understand how people perceive sugar content in different foods
           </p>
         </header>

@@ -72,8 +72,8 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4">
-      <div className="mb-8 text-center">
+    <div className="w-full max-w-6xl mx-auto px-0 md:px-4">
+      <div className="mb-4 md:mb-8 text-center px-2 md:px-0">
         <h2 className="hidden md:block text-3xl md:text-4xl font-bold mb-3 text-foreground">
           Which has less sugar?
         </h2>
@@ -87,13 +87,13 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 md:gap-8 relative">
+      <div className="grid grid-cols-2 gap-1 md:gap-8 relative">
         <Card
           onClick={() => handleChoice('left')}
           className={cn(
             "relative overflow-hidden cursor-pointer transition-all duration-300",
             "hover:shadow-hover hover:scale-[1.02] active:scale-[0.98]",
-            "border-2",
+            "border-2 rounded-none md:rounded-lg",
             selectedSide === 'left' 
               ? "border-primary shadow-hover scale-[1.02]" 
               : selectedSide === 'right'
@@ -108,8 +108,8 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             />
           </div>
-          <div className="p-2 md:p-4 text-center bg-card">
-            <h3 className="text-sm md:text-lg font-semibold text-card-foreground">
+          <div className="p-1 md:p-4 text-center bg-card">
+            <h3 className="text-xs md:text-lg font-semibold text-card-foreground">
               {leftFood.name}
             </h3>
           </div>
@@ -136,7 +136,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
           className={cn(
             "relative overflow-hidden cursor-pointer transition-all duration-300",
             "hover:shadow-hover hover:scale-[1.02] active:scale-[0.98]",
-            "border-2",
+            "border-2 rounded-none md:rounded-lg",
             selectedSide === 'right' 
               ? "border-primary shadow-hover scale-[1.02]" 
               : selectedSide === 'left'
@@ -151,8 +151,8 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             />
           </div>
-          <div className="p-2 md:p-4 text-center bg-card">
-            <h3 className="text-sm md:text-lg font-semibold text-card-foreground">
+          <div className="p-1 md:p-4 text-center bg-card">
+            <h3 className="text-xs md:text-lg font-semibold text-card-foreground">
               {rightFood.name}
             </h3>
           </div>
