@@ -74,23 +74,20 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, compari
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-      <h2 className="text-4xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+      <h2 className="text-4xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
         All Done! 🎉
       </h2>
-      <p className="text-xl text-muted-foreground mb-2">
-        You've completed {totalComparisons} comparisons
-      </p>
       
-      <div className="grid grid-cols-3 gap-4 my-8 max-w-2xl w-full">
-        <Card className="p-6">
+      <div className="grid grid-cols-3 gap-4 mb-8 max-w-2xl w-full">
+        <Card className="p-4">
           <div className="text-3xl font-bold text-green-500">{correctAnswers}</div>
           <div className="text-sm text-muted-foreground mt-1">Correct</div>
         </Card>
-        <Card className="p-6">
+        <Card className="p-4">
           <div className="text-3xl font-bold text-red-500">{totalComparisons - correctAnswers}</div>
           <div className="text-sm text-muted-foreground mt-1">Incorrect</div>
         </Card>
-        <Card className="p-6">
+        <Card className="p-4">
           <div className="text-3xl font-bold text-primary">{accuracy}%</div>
           <div className="text-sm text-muted-foreground mt-1">Accuracy</div>
         </Card>
