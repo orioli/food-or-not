@@ -225,7 +225,7 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, session
           </Button>
           <Button 
             onClick={() => navigate("/database")}
-            className="bg-orange-600 hover:bg-orange-700 text-white"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground"
             size="lg"
           >
             See Sugar Database
