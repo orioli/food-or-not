@@ -74,7 +74,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
   return (
     <div className="w-full max-w-6xl mx-auto px-4">
       <div className="mb-8 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-3 text-foreground">
+        <h2 className="hidden md:block text-3xl md:text-4xl font-bold mb-3 text-foreground">
           Which has less sugar?
         </h2>
         <p className="text-muted-foreground mb-4">
