@@ -55,6 +55,16 @@ const FOOD_ITEMS: FoodItem[] = [
   },
 ];
 
+// Fisher-Yates shuffle algorithm - properly shuffles array without corruption
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 // Generate all possible pairs
 const generatePairs = (items: FoodItem[]): [FoodItem, FoodItem][] => {
   const pairs: [FoodItem, FoodItem][] = [];
@@ -68,8 +78,21 @@ const generatePairs = (items: FoodItem[]): [FoodItem, FoodItem][] => {
       }
     }
   }
-  // Shuffle the pairs
-  return pairs.sort(() => Math.random() - 0.5);
+  
+  // Use Fisher-Yates shuffle instead of unreliable Array.sort()
+  const shuffled = shuffleArray(pairs);
+  
+  // Validate: ensure no pair has the same item on both sides
+  const validated = shuffled.filter(([left, right]) => {
+    if (left.id === right.id) {
+      console.error('❌ CRITICAL: Duplicate pair detected!', left.name);
+      return false;
+    }
+    return true;
+  });
+  
+  console.log('✅ Generated', validated.length, 'valid pairs');
+  return validated;
 };
 
 const Index = () => {
