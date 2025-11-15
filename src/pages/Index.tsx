@@ -76,6 +76,8 @@ const Index = () => {
   const [sessionId] = useState(() => crypto.randomUUID());
   const [foodPairs] = useState(() => generatePairs(FOOD_ITEMS));
   const [score, setScore] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [incorrectAnswers, setIncorrectAnswers] = useState(0);
   const [comparisons, setComparisons] = useState<Array<{
     sessionId: string;
     winnerId: string;
@@ -95,6 +97,13 @@ const Index = () => {
     const pointChange = isCorrect ? 1 : -1;
     
     setScore(prev => prev + pointChange);
+    
+    // Update correct/incorrect counters
+    if (isCorrect) {
+      setCorrectAnswers(prev => prev + 1);
+    } else {
+      setIncorrectAnswers(prev => prev + 1);
+    }
     
     const comparison = {
       sessionId,
@@ -148,8 +157,8 @@ const Index = () => {
           <p>Anonymous session • No data is personally identifiable</p>
           <p className="mt-2">
             Comparisons made: {comparisons.length} | 
-            Correct: {comparisons.filter(c => c.isCorrect).length} | 
-            Incorrect: {comparisons.filter(c => !c.isCorrect).length}
+            Correct: {correctAnswers} | 
+            Incorrect: {incorrectAnswers}
           </p>
         </footer>
       </div>
