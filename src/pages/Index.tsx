@@ -146,6 +146,7 @@ const Index = () => {
           correctAnswers={correctAnswers}
           score={score}
           completedComparisons={comparisons.length}
+          sessionId={sessionId}
           comparisons={comparisons}
         />
 
