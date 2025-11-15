@@ -82,6 +82,10 @@ const Index = () => {
     sessionId: string;
     winnerId: string;
     loserId: string;
+    winnerName: string;
+    loserName: string;
+    winnerSugar: number;
+    loserSugar: number;
     timestamp: Date;
     isCorrect: boolean;
   }>>([]);
@@ -109,6 +113,10 @@ const Index = () => {
       sessionId,
       winnerId,
       loserId,
+      winnerName: winner.name,
+      loserName: loser.name,
+      winnerSugar: winner.sugarPercentage,
+      loserSugar: loser.sugarPercentage,
       timestamp: new Date(),
       isCorrect,
     };
@@ -154,6 +162,7 @@ const Index = () => {
           correctAnswers={correctAnswers}
           score={score}
           completedComparisons={comparisons.length}
+          comparisons={comparisons}
         />
 
         <footer className="mt-16 text-center text-sm text-muted-foreground">
