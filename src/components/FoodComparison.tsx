@@ -11,7 +11,7 @@ interface FoodItem {
 
 interface FoodComparisonProps {
   foodPairs: [FoodItem, FoodItem][];
-  onChoice: (winnerId: string, loserId: string) => void;
+  onChoice: (winnerId: string, loserId: string, isCorrect: boolean) => void;
   correctAnswers: number;
   score: number;
   completedComparisons: number;
@@ -34,6 +34,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSide, setSelectedSide] = useState<'left' | 'right' | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showFeedback, setShowFeedback] = useState<'correct' | 'incorrect' | null>(null);
 
   if (currentIndex >= foodPairs.length) {
     return (
@@ -56,13 +57,18 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
 
     const winner = side === 'left' ? leftFood : rightFood;
     const loser = side === 'left' ? rightFood : leftFood;
+    
+    // Check if correct
+    const isCorrect = winner.sugarPercentage < loser.sugarPercentage;
+    setShowFeedback(isCorrect ? 'correct' : 'incorrect');
 
     setTimeout(() => {
-      onChoice(winner.id, loser.id);
+      onChoice(winner.id, loser.id, isCorrect);
       setCurrentIndex(prev => prev + 1);
       setSelectedSide(null);
       setIsAnimating(false);
-    }, 600);
+      setShowFeedback(null);
+    }, 1200);
   };
 
   return (
@@ -81,7 +87,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid md:grid-cols-2 gap-6 md:gap-8 relative">
         <Card
           onClick={() => handleChoice('left')}
           className={cn(
@@ -113,6 +119,17 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
             </div>
           )}
         </Card>
+
+        {/* Feedback overlay between photos */}
+        {showFeedback && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+            <div className="w-[20%] aspect-square bg-background/95 rounded-full flex items-center justify-center shadow-2xl border-4 border-primary animate-scale-in">
+              <span className="text-8xl">
+                {showFeedback === 'correct' ? '✅' : '❌'}
+              </span>
+            </div>
+          </div>
+        )}
 
         <Card
           onClick={() => handleChoice('right')}

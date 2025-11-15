@@ -90,14 +90,12 @@ const Index = () => {
     isCorrect: boolean;
   }>>([]);
 
-  const handleChoice = (winnerId: string, loserId: string) => {
+  const handleChoice = (winnerId: string, loserId: string, isCorrect: boolean) => {
     const winner = FOOD_ITEMS.find(item => item.id === winnerId);
     const loser = FOOD_ITEMS.find(item => item.id === loserId);
     
     if (!winner || !loser) return;
     
-    // Check if the choice was correct (winner has less sugar than loser)
-    const isCorrect = winner.sugarPercentage < loser.sugarPercentage;
     const pointChange = isCorrect ? 1 : -1;
     
     setScore(prev => prev + pointChange);
@@ -124,17 +122,6 @@ const Index = () => {
     setComparisons(prev => [...prev, comparison]);
     
     console.log('Comparison recorded:', comparison);
-    
-    // Show feedback toast
-    if (isCorrect) {
-      toast.success("Correct! +1 point", {
-        duration: 1500,
-      });
-    } else {
-      toast.error("Incorrect! -1 point", {
-        duration: 1500,
-      });
-    }
   };
 
   useEffect(() => {
