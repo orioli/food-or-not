@@ -153,8 +153,11 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, compari
           Download Your Data
         </Button>
         
-        <p className="text-muted-foreground mb-3">
+        <p className="text-muted-foreground mb-1">
           Thank you for helping us understand food perceptions!
+        </p>
+        <p className="text-sm text-muted-foreground mb-3">
+          Contact: jose.berengueres@nu.edu.kz
         </p>
         <p className="text-lg font-semibold text-foreground">
           {correctAnswers < 7 && "You underperform a random monkey playing the game"}
