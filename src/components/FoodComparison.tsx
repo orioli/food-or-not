@@ -12,26 +12,25 @@ interface FoodItem {
 interface FoodComparisonProps {
   foodPairs: [FoodItem, FoodItem][];
   onChoice: (winnerId: string, loserId: string) => void;
+  correctAnswers: number;
+  score: number;
+  completedComparisons: number;
 }
 
-export const FoodComparison = ({ foodPairs, onChoice }: FoodComparisonProps) => {
+import { ResultsScreen } from "./ResultsScreen";
+
+export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, completedComparisons }: FoodComparisonProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSide, setSelectedSide] = useState<'left' | 'right' | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
 
   if (currentIndex >= foodPairs.length) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-        <h2 className="text-4xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
-          All Done! 🎉
-        </h2>
-        <p className="text-xl text-muted-foreground mb-2">
-          You've completed {foodPairs.length} comparisons
-        </p>
-        <p className="text-muted-foreground">
-          Thank you for helping us understand food perceptions!
-        </p>
-      </div>
+      <ResultsScreen 
+        totalComparisons={completedComparisons}
+        correctAnswers={correctAnswers}
+        score={score}
+      />
     );
   }
 
