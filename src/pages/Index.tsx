@@ -136,7 +136,7 @@ const Index = () => {
             Sugar Perception Test
           </h1>
           <p className="text-sm md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Help us understand how people perceive sugar content in different foods
+            Help us (<a href="https://www.amazon.com/stores/Jose-Berengueres/author/B00LU2U7VE" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Dr. Jose Berengueres et al.</a>) understand how people perceive sugar content in different foods.
           </p>
         </header>
 
