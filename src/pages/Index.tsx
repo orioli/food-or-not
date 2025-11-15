@@ -138,9 +138,6 @@ const Index = () => {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Help us understand how people perceive sugar content in different foods
           </p>
-          <div className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-            <span className="text-2xl font-bold text-foreground">Score: {score}</span>
-          </div>
         </header>
 
         <FoodComparison 
