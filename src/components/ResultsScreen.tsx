@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ReferenceLine, ResponsiveContainer, Label } from "recharts";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ResultsScreenProps {
   totalComparisons: number;
@@ -22,6 +23,7 @@ interface ResultsScreenProps {
 }
 
 export const ResultsScreen = ({ totalComparisons, correctAnswers, score, sessionId, comparisons }: ResultsScreenProps) => {
+  const navigate = useNavigate();
   const accuracy = totalComparisons > 0 ? Math.round((correctAnswers / totalComparisons) * 100) : 0;
 
   // Record session data when component mounts
@@ -220,6 +222,13 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, session
             size="lg"
           >
             Challenge a Friend
+          </Button>
+          <Button 
+            onClick={() => navigate("/database")}
+            className="bg-orange-600 hover:bg-orange-700 text-white"
+            size="lg"
+          >
+            See Sugar Database
           </Button>
         </div>
         
