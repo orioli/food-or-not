@@ -147,6 +147,14 @@ const Index = () => {
     console.log('Comparison recorded:', comparison);
   };
 
+  // Preload all images at game start for instant transitions
+  useEffect(() => {
+    FOOD_ITEMS.forEach(item => {
+      const img = new Image();
+      img.src = item.imageUrl;
+    });
+  }, []);
+
   useEffect(() => {
     console.log(`Session ${sessionId} started with ${foodPairs.length} comparisons`);
   }, [sessionId, foodPairs.length]);
