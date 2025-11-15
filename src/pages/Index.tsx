@@ -151,6 +151,9 @@ const Index = () => {
         <FoodComparison 
           foodPairs={foodPairs}
           onChoice={handleChoice}
+          correctAnswers={correctAnswers}
+          score={score}
+          completedComparisons={comparisons.length}
         />
 
         <footer className="mt-16 text-center text-sm text-muted-foreground">
