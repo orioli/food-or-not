@@ -78,7 +78,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
       setSelectedSide(null);
       setIsAnimating(false);
       setShowFeedback(null);
-    }, 350);
+    }, 300);
   };
 
   return (
@@ -123,9 +123,11 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
               {leftFood.name}
             </h3>
           </div>
-          {selectedSide === 'left' && (
+          {selectedSide !== null && (
             <div className="absolute inset-0 bg-primary/10 flex items-center justify-center backdrop-blur-[2px]">
-              <div className="text-4xl md:text-6xl">✓</div>
+              <div className="text-3xl md:text-5xl font-bold w-1/2 text-center">
+                {leftFood.sugarPercentage}%
+              </div>
             </div>
           )}
         </Card>
@@ -166,9 +168,11 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
               {rightFood.name}
             </h3>
           </div>
-          {selectedSide === 'right' && (
+          {selectedSide !== null && (
             <div className="absolute inset-0 bg-primary/10 flex items-center justify-center backdrop-blur-[2px]">
-              <div className="text-4xl md:text-6xl">✓</div>
+              <div className="text-3xl md:text-5xl font-bold w-1/2 text-center">
+                {rightFood.sugarPercentage}%
+              </div>
             </div>
           )}
         </Card>
