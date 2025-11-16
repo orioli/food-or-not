@@ -78,7 +78,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
       setSelectedSide(null);
       setIsAnimating(false);
       setShowFeedback(null);
-    }, 300);
+    }, 450);
   };
 
   return (
@@ -124,8 +124,8 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
             </h3>
           </div>
           {selectedSide !== null && (
-            <div className="absolute inset-0 bg-primary/10 flex items-center justify-center backdrop-blur-[2px]">
-              <div className="text-3xl md:text-5xl font-bold w-1/2 text-center">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="bg-muted text-white text-3xl md:text-5xl font-bold px-6 py-3 rounded-lg">
                 {leftFood.sugarPercentage}%
               </div>
             </div>
@@ -169,8 +169,8 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
             </h3>
           </div>
           {selectedSide !== null && (
-            <div className="absolute inset-0 bg-primary/10 flex items-center justify-center backdrop-blur-[2px]">
-              <div className="text-3xl md:text-5xl font-bold w-1/2 text-center">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="bg-muted text-white text-3xl md:text-5xl font-bold px-6 py-3 rounded-lg">
                 {rightFood.sugarPercentage}%
               </div>
             </div>
