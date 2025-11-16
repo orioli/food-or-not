@@ -125,7 +125,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
           </div>
           {selectedSide !== null && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-muted text-white text-3xl md:text-5xl font-bold px-6 py-3 rounded-lg">
+              <div className="bg-black/70 text-white text-3xl md:text-5xl font-bold px-6 py-3 rounded-lg">
                 {leftFood.sugarPercentage}%
               </div>
             </div>
@@ -170,7 +170,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
           </div>
           {selectedSide !== null && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-muted text-white text-3xl md:text-5xl font-bold px-6 py-3 rounded-lg">
+              <div className="bg-black/70 text-white text-3xl md:text-5xl font-bold px-6 py-3 rounded-lg">
                 {rightFood.sugarPercentage}%
               </div>
             </div>
