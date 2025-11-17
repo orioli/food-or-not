@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import VisitCounter from "@/components/VisitCounter";
 import {
   Table,
   TableBody,
@@ -173,6 +174,7 @@ const SugarDatabase = () => {
           <p>Sugar content shown as percentage by weight</p>
         </div>
       </div>
+      <VisitCounter />
     </div>
   );
 };
