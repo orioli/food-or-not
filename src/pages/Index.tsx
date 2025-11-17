@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { FoodComparison } from "@/components/FoodComparison";
 import { toast } from "sonner";
 
-import prego from "@/assets/8_prego.jpeg";
-import noosa from "@/assets/16_noosa.jpeg";
-import quakerMedleys from "@/assets/26_quaker_medleys.jpeg";
-import clifBar from "@/assets/31_clif_bar.jpeg";
-import kitKat from "@/assets/50_kit_kat.jpeg";
-import honeySmacks from "@/assets/59_honey_smacks.jpeg";
+import pregoUS from "@/assets/US/8_prego.jpeg";
+import noosaUS from "@/assets/US/16_noosa.jpeg";
+import quakerMedleysUS from "@/assets/US/26_quaker_medleys.jpeg";
+import clifBarUS from "@/assets/US/31_clif_bar.jpeg";
+import kitKatUS from "@/assets/US/50_kit_kat.jpeg";
+import honeySmacksUS from "@/assets/US/59_honey_smacks.jpeg";
 
 interface FoodItem {
   id: string;
@@ -16,44 +16,36 @@ interface FoodItem {
   sugarPercentage: number;
 }
 
-const FOOD_ITEMS: FoodItem[] = [
-  {
-    id: "1",
-    imageUrl: prego,
-    name: "Prego Sauce",
-    sugarPercentage: 8
-  },
-  {
-    id: "2",
-    imageUrl: noosa,
-    name: "Noosa Yogurt",
-    sugarPercentage: 16
-  },
-  {
-    id: "3",
-    imageUrl: quakerMedleys,
-    name: "Quaker Real Medleys",
-    sugarPercentage: 26
-  },
-  {
-    id: "4",
-    imageUrl: clifBar,
-    name: "Clif Bar",
-    sugarPercentage: 31
-  },
-  {
-    id: "5",
-    imageUrl: kitKat,
-    name: "Kit Kat",
-    sugarPercentage: 50
-  },
-  {
-    id: "6",
-    imageUrl: honeySmacks,
-    name: "Honey Smacks Cereal",
-    sugarPercentage: 59
-  },
-];
+const getFoodItems = (country: string): FoodItem[] => {
+  const foodData = {
+    US: [
+      { id: "1", imageUrl: pregoUS, name: "Prego Sauce", sugarPercentage: 8 },
+      { id: "2", imageUrl: noosaUS, name: "Noosa Yogurt", sugarPercentage: 16 },
+      { id: "3", imageUrl: quakerMedleysUS, name: "Quaker Real Medleys", sugarPercentage: 26 },
+      { id: "4", imageUrl: clifBarUS, name: "Clif Bar", sugarPercentage: 31 },
+      { id: "5", imageUrl: kitKatUS, name: "Kit Kat", sugarPercentage: 50 },
+      { id: "6", imageUrl: honeySmacksUS, name: "Honey Smacks Cereal", sugarPercentage: 59 },
+    ],
+    SWEDEN: [
+      { id: "1", imageUrl: pregoUS, name: "Swedish Food 1", sugarPercentage: 8 },
+      { id: "2", imageUrl: noosaUS, name: "Swedish Food 2", sugarPercentage: 16 },
+      { id: "3", imageUrl: quakerMedleysUS, name: "Swedish Food 3", sugarPercentage: 26 },
+      { id: "4", imageUrl: clifBarUS, name: "Swedish Food 4", sugarPercentage: 31 },
+      { id: "5", imageUrl: kitKatUS, name: "Swedish Food 5", sugarPercentage: 50 },
+      { id: "6", imageUrl: honeySmacksUS, name: "Swedish Food 6", sugarPercentage: 59 },
+    ],
+    AUSTRALIA: [
+      { id: "1", imageUrl: pregoUS, name: "Australian Food 1", sugarPercentage: 8 },
+      { id: "2", imageUrl: noosaUS, name: "Australian Food 2", sugarPercentage: 16 },
+      { id: "3", imageUrl: quakerMedleysUS, name: "Australian Food 3", sugarPercentage: 26 },
+      { id: "4", imageUrl: clifBarUS, name: "Australian Food 4", sugarPercentage: 31 },
+      { id: "5", imageUrl: kitKatUS, name: "Australian Food 5", sugarPercentage: 50 },
+      { id: "6", imageUrl: honeySmacksUS, name: "Australian Food 6", sugarPercentage: 59 },
+    ],
+  };
+  
+  return foodData[country as keyof typeof foodData] || foodData.US;
+};
 
 // Fisher-Yates shuffle algorithm - properly shuffles array without corruption
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -96,8 +88,10 @@ const generatePairs = (items: FoodItem[]): [FoodItem, FoodItem][] => {
 };
 
 const Index = () => {
+  const [country, setCountry] = useState("US");
   const [sessionId] = useState(() => crypto.randomUUID());
-  const [foodPairs] = useState(() => generatePairs(FOOD_ITEMS));
+  const FOOD_ITEMS = getFoodItems(country);
+  const [foodPairs, setFoodPairs] = useState(() => generatePairs(FOOD_ITEMS));
   const [score, setScore] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
@@ -112,6 +106,12 @@ const Index = () => {
     timestamp: Date;
     isCorrect: boolean;
   }>>([]);
+
+  // Regenerate food pairs when country changes
+  useEffect(() => {
+    const newFoodItems = getFoodItems(country);
+    setFoodPairs(generatePairs(newFoodItems));
+  }, [country]);
 
   const handleChoice = (winnerId: string, loserId: string, isCorrect: boolean) => {
     const winner = FOOD_ITEMS.find(item => item.id === winnerId);
@@ -153,7 +153,7 @@ const Index = () => {
       const img = new Image();
       img.src = item.imageUrl;
     });
-  }, []);
+  }, [country]);
 
   useEffect(() => {
     console.log(`Session ${sessionId} started with ${foodPairs.length} comparisons`);
@@ -179,6 +179,8 @@ const Index = () => {
           completedComparisons={comparisons.length}
           sessionId={sessionId}
           comparisons={comparisons}
+          country={country}
+          onCountryChange={setCountry}
         />
 
         <footer className="mt-16 text-center text-sm text-muted-foreground">

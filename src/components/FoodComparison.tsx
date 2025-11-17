@@ -27,11 +27,13 @@ interface FoodComparisonProps {
     timestamp: Date;
     isCorrect: boolean;
   }>;
+  country: string;
+  onCountryChange: (country: string) => void;
 }
 
 import { ResultsScreen } from "./ResultsScreen";
 
-export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, completedComparisons, sessionId, comparisons }: FoodComparisonProps) => {
+export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, completedComparisons, sessionId, comparisons, country, onCountryChange }: FoodComparisonProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSide, setSelectedSide] = useState<'left' | 'right' | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -84,6 +86,44 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
   return (
     <div className="w-full max-w-6xl mx-auto px-0 md:px-4">
       <div className="mb-4 md:mb-8 text-center px-2 md:px-0">
+        <div className="flex justify-center gap-2 mb-6">
+          <button
+            onClick={() => onCountryChange("US")}
+            className={cn(
+              "text-4xl md:text-5xl p-3 rounded-lg transition-all",
+              country === "US" 
+                ? "bg-primary/20 scale-110 ring-2 ring-primary" 
+                : "hover:bg-muted opacity-60 hover:opacity-100"
+            )}
+            aria-label="Select United States"
+          >
+            🇺🇸
+          </button>
+          <button
+            onClick={() => onCountryChange("SWEDEN")}
+            className={cn(
+              "text-4xl md:text-5xl p-3 rounded-lg transition-all",
+              country === "SWEDEN" 
+                ? "bg-primary/20 scale-110 ring-2 ring-primary" 
+                : "hover:bg-muted opacity-60 hover:opacity-100"
+            )}
+            aria-label="Select Sweden"
+          >
+            🇸🇪
+          </button>
+          <button
+            onClick={() => onCountryChange("AUSTRALIA")}
+            className={cn(
+              "text-4xl md:text-5xl p-3 rounded-lg transition-all",
+              country === "AUSTRALIA" 
+                ? "bg-primary/20 scale-110 ring-2 ring-primary" 
+                : "hover:bg-muted opacity-60 hover:opacity-100"
+            )}
+            aria-label="Select Australia"
+          >
+            🇦🇺
+          </button>
+        </div>
         <h2 className="hidden md:block text-3xl md:text-4xl font-bold mb-3 text-foreground">
           Which has less sugar?
         </h2>
