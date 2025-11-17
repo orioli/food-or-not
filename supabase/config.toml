@@ -1,5 +1,0 @@
-[functions.track-visit]
-verify_jwt = false
-
-[functions.record-session]
-verify_jwt = false

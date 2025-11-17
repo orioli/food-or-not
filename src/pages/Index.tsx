@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { FoodComparison } from "@/components/FoodComparison";
 import { toast } from "sonner";
 import { useSearchParams } from "react-router-dom";
-import VisitCounter from "@/components/VisitCounter";
 
 import pregoUS from "@/assets/US/8_prego.jpeg";
 import noosaUS from "@/assets/US/16_noosa.jpeg";
@@ -211,7 +210,6 @@ const Index = () => {
           </p>
         </footer>
       </div>
-      <VisitCounter />
     </div>
   );
 };
