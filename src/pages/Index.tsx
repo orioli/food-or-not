@@ -21,8 +21,9 @@ import kottbullarSE from "@/assets/SWEDEN/2_kottbullar_vego.jpg";
 import caesarSaladSE from "@/assets/SWEDEN/14_caesar_salad.jpg";
 import yallaYogurtSE from "@/assets/SWEDEN/8_yalla_yogurt.jpg";
 import festisOrangeSE from "@/assets/SWEDEN/7_festis_orange.jpg";
-import xtraIceCreamSE from "@/assets/SWEDEN/25_xtra_ice_cream.png";
+import mozzarellaBurgerSE from "@/assets/SWEDEN/17_mozzarella_burger.jpg";
 import kanelbulleSE from "@/assets/SWEDEN/23_kanelbulle.jpg";
+import xtraIceCreamSE from "@/assets/SWEDEN/25_xtra_ice_cream.png";
 
 interface FoodItem {
   id: string;
@@ -46,7 +47,7 @@ const getFoodItems = (country: string): FoodItem[] => {
       { id: "2", imageUrl: caesarSaladSE, name: "Caesar Salad", sugarPercentage: 4 },
       { id: "3", imageUrl: yallaYogurtSE, name: "Yalla Yogurt", sugarPercentage: 8 },
       { id: "4", imageUrl: festisOrangeSE, name: "Festis Orange", sugarPercentage: 10 },
-      { id: "5", imageUrl: xtraIceCreamSE, name: "Xtra Glasspinnar", sugarPercentage: 18 },
+      { id: "5", imageUrl: mozzarellaBurgerSE, name: "Mighty Mozzarella Burger", sugarPercentage: 17 },
       { id: "6", imageUrl: kanelbulleSE, name: "Kanelbulle", sugarPercentage: 23 },
     ],
     AUSTRALIA: [
