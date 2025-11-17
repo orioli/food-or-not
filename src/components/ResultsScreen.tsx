@@ -20,9 +20,10 @@ interface ResultsScreenProps {
     timestamp: Date;
     isCorrect: boolean;
   }>;
+  country: string;
 }
 
-export const ResultsScreen = ({ totalComparisons, correctAnswers, score, sessionId, comparisons }: ResultsScreenProps) => {
+export const ResultsScreen = ({ totalComparisons, correctAnswers, score, sessionId, comparisons, country }: ResultsScreenProps) => {
   const navigate = useNavigate();
   const accuracy = totalComparisons > 0 ? Math.round((correctAnswers / totalComparisons) * 100) : 0;
 
@@ -224,7 +225,7 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, session
             Challenge a Friend
           </Button>
           <Button 
-            onClick={() => navigate("/database")}
+            onClick={() => navigate(`/database?country=${country}`)}
             className="bg-accent hover:bg-accent/90 text-accent-foreground"
             size="lg"
           >

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FoodComparison } from "@/components/FoodComparison";
 import { toast } from "sonner";
+import { useSearchParams } from "react-router-dom";
 
 import pregoUS from "@/assets/US/8_prego.jpeg";
 import noosaUS from "@/assets/US/16_noosa.jpeg";
@@ -95,7 +96,8 @@ const generatePairs = (items: FoodItem[]): [FoodItem, FoodItem][] => {
 };
 
 const Index = () => {
-  const [country, setCountry] = useState("AUSTRALIA");
+  const [searchParams] = useSearchParams();
+  const [country, setCountry] = useState(searchParams.get("country") || "AUSTRALIA");
   const [sessionId] = useState(() => crypto.randomUUID());
   const FOOD_ITEMS = getFoodItems(country);
   const [foodPairs, setFoodPairs] = useState(() => generatePairs(FOOD_ITEMS));

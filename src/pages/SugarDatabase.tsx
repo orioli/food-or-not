@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import {
   Table,
@@ -11,12 +12,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import prego from "@/assets/8_prego.jpeg";
-import noosa from "@/assets/16_noosa.jpeg";
-import quakerMedleys from "@/assets/26_quaker_medleys.jpeg";
-import clifBar from "@/assets/31_clif_bar.jpeg";
-import kitKat from "@/assets/50_kit_kat.jpeg";
-import honeySmacks from "@/assets/59_honey_smacks.jpeg";
+import pregoUS from "@/assets/US/8_prego.jpeg";
+import noosaUS from "@/assets/US/16_noosa.jpeg";
+import quakerMedleysUS from "@/assets/US/26_quaker_medleys.jpeg";
+import clifBarUS from "@/assets/US/31_clif_bar.jpeg";
+import kitKatUS from "@/assets/US/50_kit_kat.jpeg";
+import honeySmacksUS from "@/assets/US/59_honey_smacks.jpeg";
+
+import vegemiteAU from "@/assets/AUSTRALIA/3_vegemite.png";
+import weetabixAU from "@/assets/AUSTRALIA/4_Weetabix.png";
+import colesYoghurtAU from "@/assets/AUSTRALIA/5_Coles_natural_yoghgurt.png";
+import cheeriosAU from "@/assets/AUSTRALIA/15_Uncle_Tobys_Cheerios_Multigrain_Cereal.png";
+import colesTomatoKetchupAU from "@/assets/AUSTRALIA/29_Coles_Tomato_Ketchup_487mL.png";
+import timTamAU from "@/assets/AUSTRALIA/32_tim_tam.png";
 
 interface FoodItem {
   id: string;
@@ -25,57 +33,62 @@ interface FoodItem {
   sugarPercentage: number;
 }
 
-const FOOD_ITEMS: FoodItem[] = [
-  {
-    id: "1",
-    imageUrl: prego,
-    name: "Prego Sauce",
-    sugarPercentage: 8
-  },
-  {
-    id: "2",
-    imageUrl: noosa,
-    name: "Noosa Yogurt",
-    sugarPercentage: 16
-  },
-  {
-    id: "3",
-    imageUrl: quakerMedleys,
-    name: "Quaker Real Medleys",
-    sugarPercentage: 26
-  },
-  {
-    id: "4",
-    imageUrl: clifBar,
-    name: "Clif Bar",
-    sugarPercentage: 31
-  },
-  {
-    id: "5",
-    imageUrl: kitKat,
-    name: "Kit Kat",
-    sugarPercentage: 50
-  },
-  {
-    id: "6",
-    imageUrl: honeySmacks,
-    name: "Honey Smacks Cereal",
-    sugarPercentage: 59
-  },
-];
+const getFoodItems = (country: string): FoodItem[] => {
+  const foodData = {
+    US: [
+      { id: "1", imageUrl: pregoUS, name: "Prego Sauce", sugarPercentage: 8 },
+      { id: "2", imageUrl: noosaUS, name: "Noosa Yogurt", sugarPercentage: 16 },
+      { id: "3", imageUrl: quakerMedleysUS, name: "Quaker Real Medleys", sugarPercentage: 26 },
+      { id: "4", imageUrl: clifBarUS, name: "Clif Bar", sugarPercentage: 31 },
+      { id: "5", imageUrl: kitKatUS, name: "Kit Kat", sugarPercentage: 50 },
+      { id: "6", imageUrl: honeySmacksUS, name: "Honey Smacks Cereal", sugarPercentage: 59 },
+    ],
+    SWEDEN: [
+      { id: "1", imageUrl: pregoUS, name: "Swedish Food 1", sugarPercentage: 8 },
+      { id: "2", imageUrl: noosaUS, name: "Swedish Food 2", sugarPercentage: 16 },
+      { id: "3", imageUrl: quakerMedleysUS, name: "Swedish Food 3", sugarPercentage: 26 },
+      { id: "4", imageUrl: clifBarUS, name: "Swedish Food 4", sugarPercentage: 31 },
+      { id: "5", imageUrl: kitKatUS, name: "Swedish Food 5", sugarPercentage: 50 },
+      { id: "6", imageUrl: honeySmacksUS, name: "Swedish Food 6", sugarPercentage: 59 },
+    ],
+    AUSTRALIA: [
+      { id: "1", imageUrl: vegemiteAU, name: "Vegemite", sugarPercentage: 3 },
+      { id: "2", imageUrl: weetabixAU, name: "Weetabix Original", sugarPercentage: 4 },
+      { id: "3", imageUrl: colesYoghurtAU, name: "Coles Greek Natural Yoghurt", sugarPercentage: 5 },
+      { id: "4", imageUrl: cheeriosAU, name: "Uncle Tobys Cheerios", sugarPercentage: 15 },
+      { id: "5", imageUrl: colesTomatoKetchupAU, name: "Coles Tomato Ketchup", sugarPercentage: 29 },
+      { id: "6", imageUrl: timTamAU, name: "Tim Tam Original", sugarPercentage: 32 },
+    ],
+  };
+  
+  return foodData[country as keyof typeof foodData] || foodData.AUSTRALIA;
+};
 
 const SugarDatabase = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [country, setCountry] = useState(searchParams.get("country") || "AUSTRALIA");
 
-  // Sort by sugar percentage
+  const FOOD_ITEMS = getFoodItems(country);
   const sortedFoods = [...FOOD_ITEMS].sort((a, b) => a.sugarPercentage - b.sugarPercentage);
+
+  const handleCountryChange = (newCountry: string) => {
+    setCountry(newCountry);
+    setSearchParams({ country: newCountry });
+  };
+
+  const countryNames = {
+    US: "United States",
+    SWEDEN: "Sweden",
+    AUSTRALIA: "Australia"
+  };
 
   return (
     <div className="min-h-screen bg-gradient-bg">
       <div className="container mx-auto py-8 px-4">
         <div className="mb-6">
           <Button
-            onClick={() => navigate("/")}
+            onClick={() => navigate(`/?country=${country}`)}
             variant="ghost"
             className="mb-4"
           >
@@ -86,9 +99,34 @@ const SugarDatabase = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
             Sugar Content Database
           </h1>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg mb-6">
             Complete reference of sugar percentages in tested foods
           </p>
+
+          {/* Country Selection */}
+          <div className="flex gap-4 mb-6">
+            <Button
+              variant={country === "US" ? "default" : "outline"}
+              onClick={() => handleCountryChange("US")}
+              className="text-2xl px-6 py-6"
+            >
+              🇺🇸 {countryNames.US}
+            </Button>
+            <Button
+              variant={country === "SWEDEN" ? "default" : "outline"}
+              onClick={() => handleCountryChange("SWEDEN")}
+              className="text-2xl px-6 py-6"
+            >
+              🇸🇪 {countryNames.SWEDEN}
+            </Button>
+            <Button
+              variant={country === "AUSTRALIA" ? "default" : "outline"}
+              onClick={() => handleCountryChange("AUSTRALIA")}
+              className="text-2xl px-6 py-6"
+            >
+              🇦🇺 {countryNames.AUSTRALIA}
+            </Button>
+          </div>
         </div>
 
         <Card className="overflow-hidden">

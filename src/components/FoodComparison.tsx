@@ -47,6 +47,7 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
         score={score}
         sessionId={sessionId}
         comparisons={comparisons}
+        country={country}
       />
     );
   }
