@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FoodComparison } from "@/components/FoodComparison";
 import { toast } from "sonner";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 
 import pregoUS from "@/assets/US/8_prego.jpeg";
 import noosaUS from "@/assets/US/16_noosa.jpeg";
@@ -206,7 +206,10 @@ const Index = () => {
           <p className="mt-2">
             Comparisons made: {comparisons.length} | 
             Correct: {correctAnswers} | 
-            Incorrect: {incorrectAnswers}
+            Incorrect: {incorrectAnswers} | 
+            <Link to="/highscores" className="font-bold text-sm hover:text-primary transition-colors">
+              High Scores
+            </Link>
           </p>
         </footer>
       </div>
