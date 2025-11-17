@@ -95,7 +95,7 @@ const generatePairs = (items: FoodItem[]): [FoodItem, FoodItem][] => {
 };
 
 const Index = () => {
-  const [country, setCountry] = useState("US");
+  const [country, setCountry] = useState("AUSTRALIA");
   const [sessionId] = useState(() => crypto.randomUUID());
   const FOOD_ITEMS = getFoodItems(country);
   const [foodPairs, setFoodPairs] = useState(() => generatePairs(FOOD_ITEMS));
