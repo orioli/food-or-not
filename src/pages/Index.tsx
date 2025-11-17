@@ -44,11 +44,12 @@ const getFoodItems = (country: string): FoodItem[] => {
     ],
     SWEDEN: [
       { id: "1", imageUrl: kottbullarSE, name: "Köttbullar Vego", sugarPercentage: 2 },
-      { id: "2", imageUrl: caesarSaladSE, name: "Caesar Salad", sugarPercentage: 4 },
-      { id: "3", imageUrl: yallaYogurtSE, name: "Yalla Yogurt", sugarPercentage: 8 },
-      { id: "4", imageUrl: festisOrangeSE, name: "Festis Orange", sugarPercentage: 10 },
+      { id: "2", imageUrl: yallaYogurtSE, name: "Yalla Yogurt", sugarPercentage: 8 },
+      { id: "3", imageUrl: festisOrangeSE, name: "Festis Orange", sugarPercentage: 7 },
+      { id: "4", imageUrl: caesarSaladSE, name: "Caesar Salad", sugarPercentage: 14 },
       { id: "5", imageUrl: mozzarellaBurgerSE, name: "Mighty Mozzarella Burger", sugarPercentage: 17 },
       { id: "6", imageUrl: kanelbulleSE, name: "Kanelbulle", sugarPercentage: 23 },
+      { id: "7", imageUrl: xtraIceCreamSE, name: "Xtra Glasspinnar", sugarPercentage: 25 },
     ],
     AUSTRALIA: [
       { id: "1", imageUrl: vegemiteAU, name: "Vegemite", sugarPercentage: 3 },
