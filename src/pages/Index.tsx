@@ -9,6 +9,13 @@ import clifBarUS from "@/assets/US/31_clif_bar.jpeg";
 import kitKatUS from "@/assets/US/50_kit_kat.jpeg";
 import honeySmacksUS from "@/assets/US/59_honey_smacks.jpeg";
 
+import vegemiteAU from "@/assets/AUSTRALIA/3_vegemite.png";
+import weetabixAU from "@/assets/AUSTRALIA/4_Weetabix.png";
+import colesYoghurtAU from "@/assets/AUSTRALIA/5_Coles_natural_yoghgurt.png";
+import cheeriosAU from "@/assets/AUSTRALIA/15_Uncle_Tobys_Cheerios_Multigrain_Cereal.png";
+import colesTomatoKetchupAU from "@/assets/AUSTRALIA/29_Coles_Tomato_Ketchup_487mL.png";
+import timTamAU from "@/assets/AUSTRALIA/32_tim_tam.png";
+
 interface FoodItem {
   id: string;
   imageUrl: string;
@@ -35,12 +42,12 @@ const getFoodItems = (country: string): FoodItem[] => {
       { id: "6", imageUrl: honeySmacksUS, name: "Swedish Food 6", sugarPercentage: 59 },
     ],
     AUSTRALIA: [
-      { id: "1", imageUrl: pregoUS, name: "Australian Food 1", sugarPercentage: 8 },
-      { id: "2", imageUrl: noosaUS, name: "Australian Food 2", sugarPercentage: 16 },
-      { id: "3", imageUrl: quakerMedleysUS, name: "Australian Food 3", sugarPercentage: 26 },
-      { id: "4", imageUrl: clifBarUS, name: "Australian Food 4", sugarPercentage: 31 },
-      { id: "5", imageUrl: kitKatUS, name: "Australian Food 5", sugarPercentage: 50 },
-      { id: "6", imageUrl: honeySmacksUS, name: "Australian Food 6", sugarPercentage: 59 },
+      { id: "1", imageUrl: vegemiteAU, name: "Vegemite", sugarPercentage: 3 },
+      { id: "2", imageUrl: weetabixAU, name: "Weetabix Original", sugarPercentage: 4 },
+      { id: "3", imageUrl: colesYoghurtAU, name: "Coles Greek Natural Yoghurt", sugarPercentage: 5 },
+      { id: "4", imageUrl: cheeriosAU, name: "Uncle Tobys Cheerios", sugarPercentage: 15 },
+      { id: "5", imageUrl: colesTomatoKetchupAU, name: "Coles Tomato Ketchup", sugarPercentage: 29 },
+      { id: "6", imageUrl: timTamAU, name: "Tim Tam Original", sugarPercentage: 32 },
     ],
   };
   
