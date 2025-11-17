@@ -26,6 +26,13 @@ import cheeriosAU from "@/assets/AUSTRALIA/15_Uncle_Tobys_Cheerios_Multigrain_Ce
 import colesTomatoKetchupAU from "@/assets/AUSTRALIA/29_Coles_Tomato_Ketchup_487mL.png";
 import timTamAU from "@/assets/AUSTRALIA/32_tim_tam.png";
 
+import kottbullarSE from "@/assets/SWEDEN/2_kottbullar_vego.jpg";
+import caesarSaladSE from "@/assets/SWEDEN/14_caesar_salad.jpg";
+import yallaYogurtSE from "@/assets/SWEDEN/8_yalla_yogurt.jpg";
+import festisOrangeSE from "@/assets/SWEDEN/7_festis_orange.jpg";
+import xtraIceCreamSE from "@/assets/SWEDEN/25_xtra_ice_cream.png";
+import kanelbulleSE from "@/assets/SWEDEN/23_kanelbulle.jpg";
+
 interface FoodItem {
   id: string;
   imageUrl: string;
@@ -44,12 +51,12 @@ const getFoodItems = (country: string): FoodItem[] => {
       { id: "6", imageUrl: honeySmacksUS, name: "Honey Smacks Cereal", sugarPercentage: 59 },
     ],
     SWEDEN: [
-      { id: "1", imageUrl: pregoUS, name: "Swedish Food 1", sugarPercentage: 8 },
-      { id: "2", imageUrl: noosaUS, name: "Swedish Food 2", sugarPercentage: 16 },
-      { id: "3", imageUrl: quakerMedleysUS, name: "Swedish Food 3", sugarPercentage: 26 },
-      { id: "4", imageUrl: clifBarUS, name: "Swedish Food 4", sugarPercentage: 31 },
-      { id: "5", imageUrl: kitKatUS, name: "Swedish Food 5", sugarPercentage: 50 },
-      { id: "6", imageUrl: honeySmacksUS, name: "Swedish Food 6", sugarPercentage: 59 },
+      { id: "1", imageUrl: kottbullarSE, name: "Köttbullar Vego", sugarPercentage: 2 },
+      { id: "2", imageUrl: caesarSaladSE, name: "Caesar Salad", sugarPercentage: 4 },
+      { id: "3", imageUrl: yallaYogurtSE, name: "Yalla Yogurt", sugarPercentage: 8 },
+      { id: "4", imageUrl: festisOrangeSE, name: "Festis Orange", sugarPercentage: 10 },
+      { id: "5", imageUrl: xtraIceCreamSE, name: "Xtra Glasspinnar", sugarPercentage: 18 },
+      { id: "6", imageUrl: kanelbulleSE, name: "Kanelbulle", sugarPercentage: 23 },
     ],
     AUSTRALIA: [
       { id: "1", imageUrl: vegemiteAU, name: "Vegemite", sugarPercentage: 3 },
