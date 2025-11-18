@@ -124,6 +124,29 @@ const Index = () => {
     timestamp: Date;
     isCorrect: boolean;
   }>>([]);
+  const [locationChecked, setLocationChecked] = useState(false);
+
+  // Check geolocation and block Kazakhstan IPs
+  useEffect(() => {
+    const checkLocation = async () => {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        
+        if (data.country_code === 'KZ') {
+          window.location.replace('https://google.com');
+          return;
+        }
+        
+        setLocationChecked(true);
+      } catch (error) {
+        console.error('Location check failed:', error);
+        setLocationChecked(true);
+      }
+    };
+    
+    checkLocation();
+  }, []);
 
   // Regenerate food pairs when country changes
   useEffect(() => {
@@ -176,6 +199,17 @@ const Index = () => {
   useEffect(() => {
     console.log(`Session ${sessionId} started with ${foodPairs.length} comparisons`);
   }, [sessionId, foodPairs.length]);
+
+  if (!locationChecked) {
+    return (
+      <div className="min-h-screen bg-gradient-bg flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-bg">
