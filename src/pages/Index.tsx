@@ -209,6 +209,9 @@ const Index = () => {
             Incorrect: {incorrectAnswers} | 
             <Link to="/highscores" className="font-bold text-sm hover:text-primary transition-colors">
               High Scores
+            </Link> | 
+            <Link to="/database" className="font-bold text-sm hover:text-primary transition-colors">
+              Sugar Database
             </Link>
           </p>
         </footer>
