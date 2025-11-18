@@ -124,59 +124,6 @@ const Index = () => {
     timestamp: Date;
     isCorrect: boolean;
   }>>([]);
-  const [locationChecked, setLocationChecked] = useState(false);
-
-  // Check geolocation and block Kazakhstan IPs with multiple fallback APIs
-  useEffect(() => {
-    const checkLocation = async () => {
-      const apis = [
-        { 
-          url: 'https://freeipapi.com/api/json', 
-          countryField: 'countryCode' 
-        },
-        { 
-          url: 'https://ipapi.co/json/', 
-          countryField: 'country_code' 
-        },
-        { 
-          url: 'https://ipwho.org/', 
-          countryField: 'country_code' 
-        }
-      ];
-
-      for (const api of apis) {
-        try {
-          console.log(`Trying API: ${api.url}`);
-          const response = await fetch(api.url);
-          const data = await response.json();
-          
-          console.log('Location data:', data);
-          
-          const countryCode = data[api.countryField];
-          
-          if (countryCode === 'KZ') {
-            console.log('Kazakhstan detected, redirecting...');
-            window.location.replace('https://google.com');
-            return;
-          }
-          
-          // Success - allow access
-          setLocationChecked(true);
-          return;
-        } catch (error) {
-          console.error(`API ${api.url} failed:`, error);
-          // Try next API
-          continue;
-        }
-      }
-      
-      // All APIs failed - allow access as fallback
-      console.log('All geolocation APIs failed, allowing access');
-      setLocationChecked(true);
-    };
-    
-    checkLocation();
-  }, []);
 
   // Regenerate food pairs when country changes
   useEffect(() => {
@@ -229,17 +176,6 @@ const Index = () => {
   useEffect(() => {
     console.log(`Session ${sessionId} started with ${foodPairs.length} comparisons`);
   }, [sessionId, foodPairs.length]);
-
-  if (!locationChecked) {
-    return (
-      <div className="min-h-screen bg-gradient-bg flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-bg">
