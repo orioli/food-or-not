@@ -126,25 +126,53 @@ const Index = () => {
   }>>([]);
   const [locationChecked, setLocationChecked] = useState(false);
 
-  // Check geolocation and block Kazakhstan IPs
+  // Check geolocation and block Kazakhstan IPs with multiple fallback APIs
   useEffect(() => {
     const checkLocation = async () => {
-      try {
-        const response = await fetch('https://ipwho.org/');
-        const data = await response.json();
-        
-        console.log('Location data:', data);
-        
-        if (data.country_code === 'KZ') {
-          window.location.replace('https://google.com');
-          return;
+      const apis = [
+        { 
+          url: 'https://freeipapi.com/api/json', 
+          countryField: 'countryCode' 
+        },
+        { 
+          url: 'https://ipapi.co/json/', 
+          countryField: 'country_code' 
+        },
+        { 
+          url: 'https://ipwho.org/', 
+          countryField: 'country_code' 
         }
-        
-        setLocationChecked(true);
-      } catch (error) {
-        console.error('Location check failed:', error);
-        setLocationChecked(true);
+      ];
+
+      for (const api of apis) {
+        try {
+          console.log(`Trying API: ${api.url}`);
+          const response = await fetch(api.url);
+          const data = await response.json();
+          
+          console.log('Location data:', data);
+          
+          const countryCode = data[api.countryField];
+          
+          if (countryCode === 'KZ') {
+            console.log('Kazakhstan detected, redirecting...');
+            window.location.replace('https://google.com');
+            return;
+          }
+          
+          // Success - allow access
+          setLocationChecked(true);
+          return;
+        } catch (error) {
+          console.error(`API ${api.url} failed:`, error);
+          // Try next API
+          continue;
+        }
       }
+      
+      // All APIs failed - allow access as fallback
+      console.log('All geolocation APIs failed, allowing access');
+      setLocationChecked(true);
     };
     
     checkLocation();
