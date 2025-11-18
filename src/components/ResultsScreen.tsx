@@ -37,7 +37,7 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, session
         const airtablePayload = {
           fields: {
             session_id: sessionId,
-            country: country,
+            Country: country,
             total_comparisons: totalComparisons,
             correct_answers: correctAnswers,
             accuracy: accuracy,
