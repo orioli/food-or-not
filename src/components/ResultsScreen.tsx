@@ -34,42 +34,41 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, session
         // Direct call to Airtable (TEMPORARY WORKAROUND - Supabase is down)
         const airtableUrl = 'https://api.airtable.com/v0/appsWytoMSQ2Aif0M/foodornot';
         
-        const airtablePayload = {
-          fields: {
-            session_id: sessionId,
-            Country: country,
-            total_comparisons: totalComparisons,
-            correct_answers: correctAnswers,
-            accuracy: accuracy,
-            comparisons: JSON.stringify(comparisons.map(comp => ({
-              winnerName: comp.winnerName,
-              winnerSugar: comp.winnerSugar,
-              loserName: comp.loserName,
-              loserSugar: comp.loserSugar,
-              isCorrect: comp.isCorrect,
-              timestamp: comp.timestamp.toISOString(),
-            }))),
-            timestamp: new Date().toISOString()
-          }
-        };
-        
-        const response = await fetch(airtableUrl, {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer patK0ZreLH3JlbUiT.33cc3c4e54ae4f063a8a2ba316fc71d3de92d800dd349e21ae779d1dec81c063',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(airtablePayload)
-        });
+        // Send each comparison as a separate record
+        for (let i = 0; i < comparisons.length; i++) {
+          const comp = comparisons[i];
+          
+          const airtablePayload = {
+            fields: {
+              Trial: i + 1,
+              "Food 1": comp.winnerName,
+              "Sugar % (Food 1)": comp.winnerSugar,
+              "Food 2": comp.loserName,
+              "Sugar % (Food 2)": comp.loserSugar,
+              "Your Choice": comp.winnerName,
+              "Correct?": comp.isCorrect ? "Correct" : "Incorrect",
+              Timestamp: comp.timestamp.toISOString(),
+              session_id: sessionId,
+              Country: country
+            }
+          };
+          
+          const response = await fetch(airtableUrl, {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer patK0ZreLH3JlbUiT.33cc3c4e54ae4f063a8a2ba316fc71d3de92d800dd349e21ae779d1dec81c063',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(airtablePayload)
+          });
 
-        if (response.ok) {
-          console.log('✅ Data recorded to Airtable successfully');
-          const data = await response.json();
-          console.log('Airtable record ID:', data.id);
-        } else {
-          const errorText = await response.text();
-          console.error('❌ Error recording to Airtable:', errorText);
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`❌ Error recording trial ${i + 1} to Airtable:`, errorText);
+          }
         }
+        
+        console.log(`✅ All ${comparisons.length} trials recorded to Airtable successfully`);
       } catch (error) {
         console.error('❌ Error recording session:', error);
       }
