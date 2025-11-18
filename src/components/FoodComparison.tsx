@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import correctSound from "@/assets/correct.mp3";
+import wrongSound from "@/assets/wronganswer.mp3";
 
 interface FoodItem {
   id: string;
@@ -38,6 +40,17 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
   const [selectedSide, setSelectedSide] = useState<'left' | 'right' | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showFeedback, setShowFeedback] = useState<'correct' | 'incorrect' | null>(null);
+  
+  const correctAudioRef = useRef<HTMLAudioElement | null>(null);
+  const wrongAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Preload sounds
+  useEffect(() => {
+    correctAudioRef.current = new Audio(correctSound);
+    wrongAudioRef.current = new Audio(wrongSound);
+    correctAudioRef.current.preload = 'auto';
+    wrongAudioRef.current.preload = 'auto';
+  }, []);
 
   if (currentIndex >= foodPairs.length) {
     return (
@@ -74,6 +87,13 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
     // Check if correct
     const isCorrect = winner.sugarPercentage < loser.sugarPercentage;
     setShowFeedback(isCorrect ? 'correct' : 'incorrect');
+    
+    // Play sound effect
+    if (isCorrect) {
+      correctAudioRef.current?.play().catch(e => console.log('Audio play failed:', e));
+    } else {
+      wrongAudioRef.current?.play().catch(e => console.log('Audio play failed:', e));
+    }
 
     setTimeout(() => {
       onChoice(winner.id, loser.id, isCorrect);
