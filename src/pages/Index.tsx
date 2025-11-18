@@ -130,12 +130,12 @@ const Index = () => {
   useEffect(() => {
     const checkLocation = async () => {
       try {
-        const response = await fetch('http://ip-api.com/json/');
+        const response = await fetch('https://ipwho.org/');
         const data = await response.json();
         
         console.log('Location data:', data);
         
-        if (data.countryCode === 'KZ') {
+        if (data.country_code === 'KZ') {
           window.location.replace('https://google.com');
           return;
         }
