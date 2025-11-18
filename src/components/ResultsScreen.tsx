@@ -31,40 +31,52 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, session
   useEffect(() => {
     const recordSession = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/record-session`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify({
-            sessionId,
-            totalComparisons,
-            correctAnswers,
-            accuracy,
-            comparisons: comparisons.map(comp => ({
+        // Direct call to Airtable (TEMPORARY WORKAROUND - Supabase is down)
+        const airtableUrl = 'https://api.airtable.com/v0/appsWytoMSQ2Aif0M/foodornot';
+        
+        const airtablePayload = {
+          fields: {
+            session_id: sessionId,
+            country: country,
+            total_comparisons: totalComparisons,
+            correct_answers: correctAnswers,
+            accuracy: accuracy,
+            comparisons: JSON.stringify(comparisons.map(comp => ({
               winnerName: comp.winnerName,
               winnerSugar: comp.winnerSugar,
               loserName: comp.loserName,
               loserSugar: comp.loserSugar,
               isCorrect: comp.isCorrect,
               timestamp: comp.timestamp.toISOString(),
-            })),
-          }),
+            }))),
+            timestamp: new Date().toISOString()
+          }
+        };
+        
+        const response = await fetch(airtableUrl, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer patK0ZreLH3JlbUiT.33cc3c4e54ae4f063a8a2ba316fc71d3de92d800dd349e21ae779d1dec81c063',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(airtablePayload)
         });
 
         if (response.ok) {
-          console.log('Session data recorded successfully');
+          console.log('✅ Data recorded to Airtable successfully');
+          const data = await response.json();
+          console.log('Airtable record ID:', data.id);
         } else {
-          console.error('Error recording session:', await response.text());
+          const errorText = await response.text();
+          console.error('❌ Error recording to Airtable:', errorText);
         }
       } catch (error) {
-        console.error('Error recording session:', error);
+        console.error('❌ Error recording session:', error);
       }
     };
 
     recordSession();
-  }, [sessionId, totalComparisons, correctAnswers, accuracy, comparisons]);
+  }, [sessionId, totalComparisons, correctAnswers, accuracy, comparisons, country]);
   // Generate Gaussian/Binomial distribution data
   // For binomial: mean = n*p, std = sqrt(n*p*(1-p)) where p=0.5 for random guessing
   const n = totalComparisons;
