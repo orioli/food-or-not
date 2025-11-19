@@ -34,6 +34,13 @@ import mozzarellaBurgerSE from "@/assets/SWEDEN/17_mozzarella_burger.jpg";
 import kanelbulleSE from "@/assets/SWEDEN/23_kanelbulle.jpg";
 import xtraIceCreamSE from "@/assets/SWEDEN/25_xtra_ice_cream.png";
 
+import tanKZ from "@/assets/KAZAKHSTAN/0_tan.jpg";
+import processedBreadKZ from "@/assets/KAZAKHSTAN/5_processed_bread.jpg";
+import activiaKZ from "@/assets/KAZAKHSTAN/7_activia.jpg";
+import bunKZ from "@/assets/KAZAKHSTAN/20_bun.jpg";
+import oreoKZ from "@/assets/KAZAKHSTAN/44_oreo.jpg";
+import nutellaKZ from "@/assets/KAZAKHSTAN/56_nutella.jpg";
+
 interface FoodItem {
   id: string;
   imageUrl: string;
@@ -68,6 +75,14 @@ const getFoodItems = (country: string): FoodItem[] => {
       { id: "5", imageUrl: colesTomatoKetchupAU, name: "Coles Tomato Ketchup", sugarPercentage: 29 },
       { id: "6", imageUrl: timTamAU, name: "Tim Tam Original", sugarPercentage: 32 },
     ],
+    KAZAKHSTAN: [
+      { id: "1", imageUrl: tanKZ, name: "Tan", sugarPercentage: 0 },
+      { id: "2", imageUrl: processedBreadKZ, name: "Processed Bread", sugarPercentage: 5 },
+      { id: "3", imageUrl: activiaKZ, name: "Activia Yogurt", sugarPercentage: 7 },
+      { id: "4", imageUrl: bunKZ, name: "Bun", sugarPercentage: 20 },
+      { id: "5", imageUrl: oreoKZ, name: "Oreo", sugarPercentage: 44 },
+      { id: "6", imageUrl: nutellaKZ, name: "Nutella", sugarPercentage: 56 },
+    ],
   };
   
   return foodData[country as keyof typeof foodData] || foodData.AUSTRALIA;
@@ -89,7 +104,8 @@ const SugarDatabase = () => {
   const countryNames = {
     US: "United States",
     SWEDEN: "Sweden",
-    AUSTRALIA: "Australia"
+    AUSTRALIA: "Australia",
+    KAZAKHSTAN: "Kazakhstan"
   };
 
   return (
@@ -134,6 +150,13 @@ const SugarDatabase = () => {
               className="text-2xl px-6 py-6"
             >
               🇦🇺 {countryNames.AUSTRALIA}
+            </Button>
+            <Button
+              variant={country === "KAZAKHSTAN" ? "default" : "outline"}
+              onClick={() => handleCountryChange("KAZAKHSTAN")}
+              className="text-2xl px-6 py-6"
+            >
+              🇰🇿 {countryNames.KAZAKHSTAN}
             </Button>
           </div>
         </div>
