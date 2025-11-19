@@ -8,19 +8,17 @@ const Acknowledgements = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
             Acknowledgements
           </h1>
-          <p className="text-muted-foreground">
-            This project was inspired by the following works
-          </p>
+          <p className="text-muted-foreground">This project was inspired by the following works</p>
         </div>
 
         <div className="bg-card rounded-lg shadow-lg p-8 space-y-8">
           <div className="space-y-6">
             <div className="border-l-4 border-primary pl-6 py-2">
               <h3 className="text-lg font-semibold mb-2">1. Scrandle</h3>
-              <p className="text-muted-foreground mb-2">by Bianca Bianra</p>
-              <a 
-                href="https://scrandle.com/" 
-                target="_blank" 
+              <p className="text-muted-foreground mb-2">via Bianara</p>
+              <a
+                href="https://scrandle.com/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline break-all"
               >
@@ -31,17 +29,17 @@ const Acknowledgements = () => {
             <div className="border-l-4 border-primary pl-6 py-2">
               <h3 className="text-lg font-semibold mb-2">2. The Moral Machine Experiment</h3>
               <p className="text-muted-foreground mb-2">
-                Awad, E., Dsouza, S., Kim, R., Schulz, J., Henrich, J., Shariff, A., ... & Rahwan, I. (2018). 
-                The moral machine experiment. <em>Nature, 563</em>(7729), 59-64.
+                Awad, E., Dsouza, S., Kim, R., Schulz, J., Henrich, J., Shariff, A., ... & Rahwan, I. (2018). The moral
+                machine experiment. <em>Nature, 563</em>(7729), 59-64.
               </p>
             </div>
 
             <div className="border-l-4 border-primary pl-6 py-2">
               <h3 className="text-lg font-semibold mb-2">3. The Brown Book of Design Thinking</h3>
               <p className="text-muted-foreground mb-2">Obesity Workshop</p>
-              <a 
-                href="https://books.apple.com/gt/book/the-brown-book-of-design-thinking/id983642256" 
-                target="_blank" 
+              <a
+                href="https://books.apple.com/gt/book/the-brown-book-of-design-thinking/id983642256"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline break-all"
               >
@@ -51,10 +49,7 @@ const Acknowledgements = () => {
           </div>
 
           <div className="pt-8 border-t border-border text-center">
-            <Link 
-              to="/" 
-              className="inline-flex items-center text-primary hover:underline font-semibold"
-            >
+            <Link to="/" className="inline-flex items-center text-primary hover:underline font-semibold">
               ← Back to Sugar Perception Test
             </Link>
           </div>
