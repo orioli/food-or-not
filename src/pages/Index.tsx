@@ -212,7 +212,10 @@ const Index = () => {
             </Link> | 
             <Link to="/database" className="font-bold text-sm hover:text-primary transition-colors">
               Sugar Database
-            </Link>
+            </Link> | 
+            <a href="https://www.thelancet.com/journals/landia/article/PIIS2213-8587(25)00139-1/fulltext" target="_blank" rel="noopener noreferrer" className="font-bold text-sm hover:text-primary transition-colors">
+              The Lancet
+            </a>
           </p>
         </footer>
       </div>
