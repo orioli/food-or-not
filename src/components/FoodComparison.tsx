@@ -144,6 +144,18 @@ export const FoodComparison = ({ foodPairs, onChoice, correctAnswers, score, com
           >
             🇦🇺
           </button>
+          <button
+            onClick={() => onCountryChange("KAZAKHSTAN")}
+            className={cn(
+              "text-4xl md:text-5xl p-3 rounded-lg transition-all",
+              country === "KAZAKHSTAN" 
+                ? "bg-primary/20 scale-110 ring-2 ring-primary" 
+                : "hover:bg-muted opacity-60 hover:opacity-100"
+            )}
+            aria-label="Select Kazakhstan"
+          >
+            🇰🇿
+          </button>
         </div>
         <h2 className="hidden md:block text-3xl md:text-4xl font-bold mb-3 text-foreground">
           Which has less sugar?
