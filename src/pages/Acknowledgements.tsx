@@ -15,7 +15,7 @@ const Acknowledgements = () => {
           <div className="space-y-6">
             <div className="border-l-4 border-primary pl-6 py-2">
               <h3 className="text-lg font-semibold mb-2">1. Scrandle</h3>
-              <p className="text-muted-foreground mb-2">via Bianara</p>
+              <p className="text-muted-foreground mb-2">via Binara</p>
               <a
                 href="https://scrandle.com/"
                 target="_blank"
