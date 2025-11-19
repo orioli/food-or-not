@@ -215,7 +215,10 @@ const Index = () => {
             </Link> | 
             <a href="https://www.thelancet.com/journals/landia/article/PIIS2213-8587(25)00139-1/fulltext" target="_blank" rel="noopener noreferrer" className="font-bold text-sm hover:text-primary transition-colors">
               The Lancet
-            </a>
+            </a> | 
+            <Link to="/acknowledgements" className="font-bold text-sm hover:text-primary transition-colors">
+              Acknowledgements
+            </Link>
           </p>
         </footer>
       </div>
