@@ -14,7 +14,7 @@ Deno.serve(async (req) => {
   try {
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? ''
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
     // Get IP address from request headers
@@ -22,9 +22,9 @@ Deno.serve(async (req) => {
                      req.headers.get('x-real-ip') || 
                      'unknown';
 
-    const { sessionId, totalComparisons, correctAnswers, accuracy, comparisons } = await req.json();
+    const { sessionId, totalComparisons, correctAnswers, accuracy, country, comparisons } = await req.json();
 
-    console.log('Recording session:', { sessionId, totalComparisons, correctAnswers, accuracy, ipAddress });
+    console.log('Recording session:', { sessionId, totalComparisons, correctAnswers, accuracy, country, ipAddress });
 
     // Insert session summary
     const { error: sessionError } = await supabaseClient
@@ -34,6 +34,7 @@ Deno.serve(async (req) => {
         total_comparisons: totalComparisons,
         correct_answers: correctAnswers,
         accuracy: accuracy,
+        country: country,
         ip_address: ipAddress,
       });
 

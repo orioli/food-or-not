@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ReferenceLine, ResponsiveContainer, Label } from "recharts";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ResultsScreenProps {
   totalComparisons: number;
@@ -31,6 +32,32 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, session
   useEffect(() => {
     const recordSession = async () => {
       try {
+        // Record to Supabase via edge function
+        const { data, error } = await supabase.functions.invoke('record-session', {
+          body: {
+            sessionId,
+            totalComparisons,
+            correctAnswers,
+            accuracy,
+            country,
+            comparisons: comparisons.map(comp => ({
+              winnerName: comp.winnerName,
+              winnerSugar: comp.winnerSugar,
+              loserName: comp.loserName,
+              loserSugar: comp.loserSugar,
+              isCorrect: comp.isCorrect,
+              timestamp: comp.timestamp.toISOString()
+            }))
+          }
+        });
+
+        if (error) {
+          console.error('❌ Error recording session to Supabase:', error);
+        } else {
+          console.log(`✅ Session recorded to Supabase successfully`);
+        }
+
+        /* AIRTABLE CODE - COMMENTED OUT
         // Direct call to Airtable (TEMPORARY WORKAROUND - Supabase is down)
         const airtableUrl = 'https://api.airtable.com/v0/appsWytoMSQ2Aif0M/foodornot';
         
@@ -56,7 +83,7 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, session
           const response = await fetch(airtableUrl, {
             method: 'POST',
             headers: {
-              'Authorization': 'Bearer patK0ZreLH3JlbUiT.33cc3c4e54ae4f063a8a2ba316fc71d3de92d800dd349e21ae779d1dec81c063',
+              'Authorization': 'Bearer patK0ZreLH3JlbUiT.xxx',
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(airtablePayload)
@@ -69,6 +96,7 @@ export const ResultsScreen = ({ totalComparisons, correctAnswers, score, session
         }
         
         console.log(`✅ All ${comparisons.length} trials recorded to Airtable successfully`);
+        END AIRTABLE CODE */
       } catch (error) {
         console.error('❌ Error recording session:', error);
       }
